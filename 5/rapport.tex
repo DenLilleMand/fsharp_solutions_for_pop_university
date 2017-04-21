@@ -1,0 +1,91 @@
+\documentclass[12pt, a4paper, hidelinks]{article}
+
+% Packages:
+\usepackage{graphicx}                   % For figure includes
+\usepackage[T1]{fontenc}                % For mixing up \textsc{} with \textbf{}
+\usepackage[utf8]{inputenc}             % For scandinavian input characters(æøå)
+\usepackage{amsfonts, amsmath, amssymb} % For common mathsymbols and fonts
+\usepackage[danish]{babel}              % For danish titles
+\usepackage{hyperref}                   % For making links and refrences
+\usepackage{url}                        % Just because {~_^}
+\usepackage{array}                      % ...
+\usepackage[usenames, dvipsnames, svgnames, table]{xcolor}
+\usepackage{tabularx, colortbl}
+\usepackage{verbatim} % For entering code snippets.
+\usepackage{fancyvrb} % A "fancy" verbatim (for pseudo code).
+\usepackage{listings} % For boxed codesnippets, and file includes. (begin)
+\usepackage{lipsum}   % For generating dummy text at this demonstration
+\usepackage{float}
+
+% Basic layout:
+\setlength{\textwidth}{165mm}
+\setlength{\textheight}{240mm}
+\setlength{\parindent}{0mm}
+\setlength{\parskip}{\parsep}
+\setlength{\headheight}{0mm}
+\setlength{\headsep}{0mm}
+\setlength{\hoffset}{-2.5mm}
+\setlength{\voffset}{0mm}
+\setlength{\footskip}{15mm}
+\setlength{\oddsidemargin}{0mm}
+\setlength{\topmargin}{0mm}
+\setlength{\evensidemargin}{0mm}
+
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+% Colors:
+\definecolor{KU-red}{RGB}{144, 26, 30}
+
+% Text Coloring:
+\newcommand{\green}[1]{\textbf{\color{green}{#1}}}
+\newcommand{\blue} [1]{\textbf{\color{blue} {#1}}}
+\newcommand{\red}  [1]{\textbf{\color{red}  {#1}}}
+
+
+% ************************* Start Document *****************
+\begin{document}
+
+% ************************* Page Header ********************
+\begin{minipage}[b]{1.0\linewidth}
+\includegraphics[height=30mm]{KULogo}
+
+\vspace*{-16ex}
+\begin{center}
+    {\Large \bf POP} \vspace*{1ex} \\
+    {\large Ugeopgave 5} \vspace*{1ex} \\
+    {\large Matti Andreas Nielsen  } \\
+    {\large \today{}  }
+\end{center}
+\vspace*{-3pt}
+{\color{KU-red}\hrule}
+\end{minipage}
+\vspace{2ex}
+
+% **************** Assignment Starts Here ******************
+\tableofcontents \newpage
+
+\section{5i3}
+Jeg har implementeret min arraySort metode som en rekursiv funktion, der kun bruger de tilladte funktioner fra de forrige opgaver.
+Den er bygget sådan op at den tager et array, som parameter og matcher dette array via pattern matching til 3 cases. 
+De 2 første cases ligner hinanden i den forstand at de begge returnere det samme, det array de fik som input, den ene er hvis arrayet er tomt og den anden er hvis der kun er 1 element, hvilket derfor er sorteret.
+Den tredje case matcher på et array, som har over ét element og deler derefter arrayet op i en tail og head.
+Head består af det første element i arrayet og tail er resten af arrayet.
+Nu er ideen så at genere et to dimensionelt array og lave det om til et flat array vha. Array.collect, det todimensionelle array bliver genereret rekursivt af at kalde vores funktion 2 gange for hver iteration, én med resultatet af en Array.filter funktion der returnere alle tal som er lavere end head, og et andet kald som tager imod talene som er højere end head. 
+Vi bruger så array indices til at indsætte det array som indholder de lavere tal på venstre side af et array der udelukkende indeholder head og de tal som er højere bliver indsat på højre side. 
+
+% **************** Jeg synes at mine analyser af de her algoritmer godt kan være lidt tynde og der bliver lavet mange krumspring i argumentationen og dét bygger i høj grad om at vi har gennemgået lige præcis den her slags følger i undervisningen, men jeg ville f.eks ikke vide hvordan jeg skulle kategorisere min 5i3 algoritme hvis jeg skulle tage højde for at de to filter metoder itererer over de samme tal. Og enlig har jeg ikke nogen plan når jeg går igang med at kigge på kørertiden af en algoritme.    *********
+Kører tiden på denne algoritme er $$ n^2 $$ fordi vi kalder den øvre rekursive funktion n gange, og for hver gang vi kører n så kører vi over n-i hvor i er indexet der tæller hvor mange gange den ydre funktion er kaldt. Her ser jeg bort fra at vi rent faktisk filtrerer over de samme værdier 2 gange, fordi jeg synes at det er en implementations detalje i det her tilfælde som man godt ville kunne fixe. En måde at fixe det på ville være at bruge Array.fold til kun at kører vores tail igennem 1 gang og accumulere to arrays, et med de værdier som er højere end head og et som er lavere. 
+Man kan beskrive vores kører tid med denne følge:
+$$ (n-1)\text{,} (n-2)\text{,} (n-3) \text{,} \cdots \text{,} n-(n-1) $$
+
+Dét er det samme som følgen $$ \sum_{i=1}^{n} i  $$ som er det samme som $$ (n^2+n)/2 $$
+som man kan omskrive til $$ 0.5*n^2+0.5*n $$ og fordi det er bigO tager vi ikke højde for konstanterne og får dermed $$ n^2 $$  
+
+\section{5i4}
+arraySortD er en implementation af bubble sort, som tager imod et array og returnere en sorteret udgave.
+Det indre loop sammenligner index 0 med 1, 1 med 2, 2 med 3 op til n og hvis den finder et element, som er højere end det vi sammenligner med bytter den rundt på dem.
+Så har vi et ydre loop, som kører indtil det indre loop har kørt hele arrayet igennem uden at lave en ombytning, og derfor må arrayet være sorteret.
+
+Denne algoritme er $$ n^2 $$ ligesom den forrige, fordi den kører det ydre loop n gange og det indre loop n gange. 
+\end{document}

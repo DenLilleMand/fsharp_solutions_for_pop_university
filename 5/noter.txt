@@ -1,0 +1,9 @@
+Typerne i F# har en parenthes når der er en condition ved siden af.
+
+f.eks 
+
+let herpderp : (a'[] -> unit) when a'[] comparison
+
+agtigt, maaske ikke helt rigtigt skrevet, men ikke destomindre saa kan man sige at herpderp er af typen a'[] -> unit   men kun naar a' implementere comparison . Og om comparison gaelder det at man kan vurdere om x og y er mindre eller ikke mindre end hinanden, altsaa naermest implementere et equality interface.
+
+

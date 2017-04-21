@@ -1,0 +1,91 @@
+\documentclass[12pt, a4paper, hidelinks]{article}
+
+% Packages:
+\usepackage{graphicx}                   % For figure includes
+\usepackage[T1]{fontenc}                % For mixing up \textsc{} with \textbf{}
+\usepackage[utf8]{inputenc}             % For scandinavian input characters(æøå)
+\usepackage{amsfonts, amsmath, amssymb} % For common mathsymbols and fonts
+\usepackage[danish]{babel}              % For danish titles
+\usepackage{hyperref}                   % For making links and refrences
+\usepackage{url}                        % Just because {~_^}
+\usepackage{array}                      % ...
+\usepackage[usenames, dvipsnames, svgnames, table]{xcolor}
+\usepackage{tabularx, colortbl}
+\usepackage{verbatim} % For entering code snippets.
+\usepackage{fancyvrb} % A "fancy" verbatim (for pseudo code).
+\usepackage{listings} % For boxed codesnippets, and file includes. (begin)
+\usepackage{lipsum}   % For generating dummy text at this demonstration
+\usepackage{float}
+
+% Basic layout:
+\setlength{\textwidth}{165mm}
+\setlength{\textheight}{240mm}
+\setlength{\parindent}{0mm}
+\setlength{\parskip}{\parsep}
+\setlength{\headheight}{0mm}
+\setlength{\headsep}{0mm}
+\setlength{\hoffset}{-2.5mm}
+\setlength{\voffset}{0mm}
+\setlength{\footskip}{15mm}
+\setlength{\oddsidemargin}{0mm}
+\setlength{\topmargin}{0mm}
+\setlength{\evensidemargin}{0mm}
+
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+% Colors:
+\definecolor{KU-red}{RGB}{144, 26, 30}
+
+% Text Coloring:
+\newcommand{\green}[1]{\textbf{\color{green}{#1}}}
+\newcommand{\blue} [1]{\textbf{\color{blue} {#1}}}
+\newcommand{\red}  [1]{\textbf{\color{red}  {#1}}}
+
+
+% ************************* Start Document *****************
+\begin{document}
+
+% ************************* Page Header ********************
+\begin{minipage}[b]{1.0\linewidth}
+\includegraphics[height=30mm]{KULogo}
+
+\vspace*{-16ex}
+\begin{center}
+    {\Large \bf POP} \vspace*{1ex} \\
+    {\large Ugeopgave 7} \vspace*{1ex} \\
+    {\large Matti Andreas Nielsen  } \\
+    {\large \today{}  }
+\end{center}
+\vspace*{-3pt}
+{\color{KU-red}\hrule}
+\end{minipage}
+\vspace{2ex}
+
+% **************** Assignment Starts Here ******************
+\tableofcontents \newpage
+
+\section{7i0}
+De 3 metoder i denne opgave gør alle sammen dét samme, de tager et array og index som parameter,
+og forsøger at tilgå det index i arrayet. Det som er forskellen imellem dem er hvordan de håndtere 
+fejlen der opstår når man prøver at tilgå et index, som er undenfor arrayets størrelse. Metoden 
+safeIndexIf returnere en Unchecked.defaultof<'a> i dette tilfælde, hvilket er en værdi der prøver 
+at returnere det tætteste den givne type kan komme på null,
+problemet er at nogle typer i FSharp ikke har ordentlige null værdier. Den anden metode 
+safeIndexOption returnere en Some(værdien) hvis indexet findes i arrayet, og returnere 
+None hvis det ikke findes, Option typen er en populær måde at håndtere situationer hvor
+man normalt ville returnere null i et andet programmeringssprog. 
+Den sidste metode safeIndexTry bruger en try-with, som betyder at den prøver at gøre noget, 
+hvis den fejler så griber vi den exception, som den smider og kan håndtere den, i vores
+tilfælde kaster vi den samme exception som vi griber.
+
+\section{7i1}
+I denne opgave skal jeg lave en funktioner der hedder fileReplace, som udbytter alle forekommelser af et ord med et andet ord. Jeg bruger File.ReadAllLines og File.WriteAllLines
+til til at læse og skrive til filen, og før jeg skriver så mapper jeg henover alle linjer i texten og kalder string.Replace med de argumenter min funktion tager imod.
+
+\section{7i2}
+I denne opgave skal jeg hente en html fil fra internettet, hente den ind i hukommelsen som en string, og så tælle hvor mange forekomster af tagget <a> der findes.
+Jeg bruger her en regex til at matche på et <a> tag, efter jeg har matchet er der en variable på 
+resultatet af mit match, som fortæller om der er et resultat. Hvis der er bruger jeg en while løkke til at tælle en counter op og kalder NextMatch på mit regex match, som så prøver at finde det næste match, til sidst hvis mit matchresultat ikke har været en success så stopper whileløkken og jeg printer mit count ud.
+
+\end{document}

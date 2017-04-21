@@ -1,0 +1,40 @@
+Mine tests kan alle sammen findes i CarTests.fsx, jeg har prøvet at teste således at jeg både
+har testet med korrekte handlinger og ukorrekte handlinger og de cases som
+er på grænsen imellem de to.
+Jeg har annoteret alle mine tests med en custom attribute, som man kan se på figur~\ref{fig:TestAnnotationAttribute}
+\begin{figure}[!htb]
+  \lstset{language=FSharp}
+  \text{
+    \lstinputlisting[firstline=9,lastline=10]{../TestLib.fs}
+  }
+  \caption{Custom test annotation type}
+\label{fig:TestAnnotationAttribute}
+\end{figure}
+
+og man kan se hvordan jeg bruger annotationen i figur~\ref{fig:AnnotationInAction}
+\begin{figure}[!htb]
+  \lstset{language=FSharp}
+  \text{
+    \lstinputlisting[firstline=12,lastline=19]{../CarTests.fsx}
+  }
+  \caption{Custom test annotation brugt}
+\label{fig:AnnotationInAction}
+\end{figure}
+
+Så når jeg skal kører mine tests behøver jeg ikke at sætte dem alle sammen op i en klasse
+for sig selv og kører dem, men istedet kan jeg, som man kan se i figur~\ref{fig:Reflection}
+\begin{figure}[!htb]
+  \lstset{language=FSharp}
+  \text{
+    \lstinputlisting[firstline=7,lastline=20]{../TestRunner.fsx}
+  }
+  \caption{Reflection og Annotations i aktion}
+\label{fig:Reflection}
+\end{figure}
+bare søge igennem alle typerne jeg har loaded. Hvorefter jeg kan finde alle de metoder der har min test annotation og eksekverer dem.
+Noget af det jeg mangler for at gøre dét rigtig snedigt, er at fjerne konsol output og andre ting som intet har med assertions at gøre,
+fra mit assertions bibliotek. Så ville man skulle lave min testrunner om sådan at den bruger testens returnerede boolean til at 
+outputte om testen gik godt eller dårligt, men også overordnet hvor mange tests der gik godt ud af et totalt antal.
+Via reflection ville man endda kunne bruge navnet på testen i ens output sådan at jeg heller ikke behøver 
+at give variablen testname ind til min output metode, som virker lidt redundant når selvsamme information ligger i metodens navn.
+

@@ -1,0 +1,156 @@
+\documentclass[a4paper]{article}
+%----------------------------------------------------------------------------------------
+%	PACKAGES
+%----------------------------------------------------------------------------------------
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[utf8]{inputenc}
+\usepackage[danish]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[svgnames]{xcolor} % Required to specify font color
+\usepackage[section]{placeins}
+%----------------------------------------------------------------------------------------
+%	MARGINS
+%----------------------------------------------------------------------------------------
+%\topmargin=-0.45in
+%\evensidemargin=0in
+%\oddsidemargin=0in
+%\textwidth=6.5in
+%\textheight=9.0in
+%\headsep=0.25in
+
+%----------------------------------------------------------------------------------------
+%	SET UP THE HEADER AND FOOTER
+%----------------------------------------------------------------------------------------
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+%----------------------------------------------------------------------------------------
+%	ADHOC
+%----------------------------------------------------------------------------------------
+\linespread{1.1} % Line spacing
+\graphicspath{{figures/}{anotherFigureDirectory/}}
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	COLORS
+%----------------------------------------------------------------------------------------
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{turqusnumbers}{rgb}{0.17,0.57,0.69}
+\definecolor{redstrings}{rgb}{0.5,0,0}
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+\lstdefinelanguage{FSharp}{
+    morekeywords={
+      let, new, match, with, rec, open, module,
+      namespace, type, of, member, and, for, in, do, begin,
+      end, fun, function, try, mutable, if, then, else
+    },
+    keywordstyle=\color{bluekeywords},
+    sensitive=false,
+    morecomment=[l][\color{greencomments}]{///},
+    morecomment=[l][\color{greencomments}]{//},
+    morecomment=[s][\color{greencomments}]{{(*}{*)}},
+    morestring=[b]",
+    stringstyle=\color{redstrings},
+    basicstyle=\ttfamily\small,
+    showspaces=false,
+    showstringspaces=false
+}
+
+%----------------------------------------------------------------------------------------
+%	MATH
+%----------------------------------------------------------------------------------------
+\usepackage{amsmath}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{POP \#9} % Assignment title
+\newcommand{\hmwkDueDate}{Onsdag,\ December\ 15,\ 2016} % Due date
+\newcommand{\hmwkClass}{Programmering og Problemløsning} % Course/class
+\newcommand{\hmwkClassTime}{} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Joachim} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Matti Andreas Nielsen} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+
+\newcommand*{\titleAT}{\begingroup % Create the command for including the title page in the document
+\newlength{\drop} % Command for generating a specific amount of whitespace
+\drop=0.1\textheight % Define the command as 10% of the total text height
+
+\rule{\textwidth}{1pt}\par % Thick horizontal line
+\vspace{2pt}\vspace{-\baselineskip} % Whitespace between lines
+\rule{\textwidth}{0.4pt}\par % Thin horizontal line
+
+\vspace{\drop} % Whitespace between the top lines and title
+\centering % Center all text
+\textcolor{Black}{ % Red font color
+{\Huge Programmering og Problemløsning}\\[0.5\baselineskip] % Title line 1
+{\Large Opgave 9}\\[0.75\baselineskip] % Title line 2
+{\Huge \textsc{Matti Andreas Nielsen}}}\par % Author name
+
+\vspace{0.25\drop} % Whitespace between the title and short horizontal line
+\rule{0.3\textwidth}{0.4pt}\par % Short horizontal line under the title
+\vspace{\drop} % Whitespace between the thin horizontal line and the author name
+
+\vfill % Whitespace between the author name and publisher text
+{\large \includegraphics[height=30mm]{KULogo}}
+
+\vspace*{\drop} % Whitespace under the publisher text
+
+\rule{\textwidth}{0.4pt}\par % Thin horizontal line
+\vspace{2pt}\vspace{-\baselineskip} % Whitespace between lines
+\rule{\textwidth}{1pt}\par % Thick horizontal line
+
+\endgroup}
+
+%----------------------------------------------------------------------------------------
+%	Report
+%----------------------------------------------------------------------------------------
+
+\setcounter{section}{-1}
+\setcounter{subsection}{-1}
+
+\begin{document}
+\titleAT % This command includes the title page
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Eksekvering af program}
+\input{program}
+
+\section{Tests}
+\input{test}
+
+\section{Bilag}
+\input{bilag}
+
+\end{document}

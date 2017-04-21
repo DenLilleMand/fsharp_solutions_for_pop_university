@@ -1,0 +1,137 @@
+\documentclass[12pt, a4paper, hidelinks]{article}
+
+% Packages:
+\usepackage{graphicx}                   % For figure includes
+\usepackage[T1]{fontenc}                % For mixing up \textsc{} with \textbf{}
+\usepackage[utf8]{inputenc}             % For scandinavian input characters(æøå)
+\usepackage{amsfonts, amsmath, amssymb} % For common mathsymbols and fonts
+\usepackage[danish]{babel}              % For danish titles
+\usepackage{hyperref}                   % For making links and refrences
+\usepackage{url}                        % Just because {~_^}
+\usepackage{array}                      % ...
+\usepackage[usenames, dvipsnames, svgnames, table]{xcolor}
+\usepackage{tabularx, colortbl}
+\usepackage{verbatim} % For entering code snippets.
+\usepackage{fancyvrb} % A "fancy" verbatim (for pseudo code).
+\usepackage{listings} % For boxed codesnippets, and file includes. (begin)
+\usepackage{lipsum}   % For generating dummy text at this demonstration
+\usepackage{float}
+
+% Basic layout:
+\setlength{\textwidth}{165mm}
+\setlength{\textheight}{240mm}
+\setlength{\parindent}{0mm}
+\setlength{\parskip}{\parsep}
+\setlength{\headheight}{0mm}
+\setlength{\headsep}{0mm}
+\setlength{\hoffset}{-2.5mm}
+\setlength{\voffset}{0mm}
+\setlength{\footskip}{15mm}
+\setlength{\oddsidemargin}{0mm}
+\setlength{\topmargin}{0mm}
+\setlength{\evensidemargin}{0mm}
+
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+% Colors:
+\definecolor{KU-red}{RGB}{144, 26, 30}
+
+% Text Coloring:
+\newcommand{\green}[1]{\textbf{\color{green}{#1}}}
+\newcommand{\blue} [1]{\textbf{\color{blue} {#1}}}
+\newcommand{\red}  [1]{\textbf{\color{red}  {#1}}}
+
+
+% ************************* Start Document *****************
+\begin{document}
+
+% ************************* Page Header ********************
+\begin{minipage}[b]{1.0\linewidth}
+\includegraphics[height=30mm]{bilag/KULogo}
+
+\vspace*{-16ex}
+\begin{center}
+    {\Large \bf Programmering og Problemløsning} \vspace*{1ex} \\
+    {\large Ugeopgave 2} \vspace*{1ex} \\
+    {\large Matti Andreas Nielsen  } \\
+    {\large \today{}  }
+\end{center}
+\vspace*{-3pt}
+{\color{KU-red}\hrule}
+\end{minipage}
+\vspace{2ex}
+
+% **************** Assignment Starts Here ******************
+\tableofcontents \newpage
+
+\section{2i.0 }
+
+Mine 3 udtryk:\\
+1. StringLiteral, operator, stringLiteral (* no space*)\\
+2. expression, stringLiteral (* no space *)\\
+3. stringLiteral\\
+
+Eksempler i samme rækkefølge som udtrykne:\\
+1. "U+0041"+"U+0042"\\
+2. "U+0055"+"U+0056""U+0057""U+0058"\\
+3. "U+0067""U+0068"\\
+
+
+Eksempler som ikke er gyldige er: \\
+1. ++  \\
+2. "dfjgdfk232323""U+0042"\\
+
+
+\section{2i.1}
+Udfyld følgende tabel:\\
+
+\begin{tabular}{l*{6}{c}r}
+Decimal & Binær & Heximal & Oktal \\
+\hline
+10 &  & &     \\
+& 10101 & &  \\
+& & 3f &      \\
+& & & 77      \\
+\end{tabular}
+
+Fra decimal til binær kan vi udregne det ved at regne n til 2, sådan at man f.eks udregner $$ 2^0 = 1 \text{ }, 2^1 = 2 \text{ }, 2^2 = 4 \text{ },   2^3 = 8 \text{ },   2^4 = 16 $$
+så tager man det højeste tal, som ikke går over det tal vi skal finde,
+i det her tilfælde prøver jeg at omregne 10 til binær. 
+Så det er 8, og så siger vi 8 + det næste tal der ikke får os over 10, i det her tilfælde 2. Så når vi er fundet frem til 8 + 2 så konvertere vi de pladser direkte til binært fordi vi ved at 8 er plads 4 i binær og 2 er plads 2, man kan se det endelige svar i tabellen.
+Vi ville også kunne have brugt division med 2 metoden, hvor man bliver ved med at dividere med 2, så hvis vi skulle finde 10 med den metode, ville vi kunne sige.
+
+$$ 10 \bmod 5  = 5 \text{(0 i mente)} $$
+$$ 5 \bmod 2 = 2 \text{(1 i mente)} $$
+$$ 2 \bmod 2  = 1 \text{(0 i mente)} $$
+$$ 2 \bmod 1 = 0 \text{(1 i mente)} $$
+
+Og så flipper man den rundt, og siger at den øverste er den mindste bit, og den nederste er den  højeste det giver os 1010 hvilket den anden metode også gav os.
+
+For at udregne binært til Decimal bruger vi bare en helt almindelig konverterings tabel, vi kan prøve med det binære 10101:
+
+\begin{tabular}{l*{8}{c}r}
+Decimal værdi & 256 & 128 & 64 & 32 & 16 & 8 & 4 & 2 & 1 \\
+Binær værdi   & 0   & 0   &  0 &  0 &  1 & 0 & 1 & 0 & 1  \\
+\end{tabular}
+
+
+Binær til hex:
+Hex går op i 16, det skal vi bruge 4 bits til at repræsentere i binært. Man skal opdele vores binære tal i bloks af 4 bits af gangen, og så ligge dem sammen. 
+10101  -->  0001 + 0101  --> 1 + 5 = 15
+
+Konvertering fra binært til oktal er næsten det samme som binært til hex. Istedet for at opdele tallet i blokke af 4, deler vi nu det binære tal op i blokke af 3, da der kun skal bruges 3 bit for at repræsentere et enkelt cifre i oktal.
+
+\begin{tabular}{l*{6}{c}r}
+Decimal & Binær & Heximal & Oktal \\
+\hline
+10 & 1010  & A & 12\\
+21 & 10101 & 15 & 25 \\
+63 & 111111 & 3f & 77 \\
+63 & 111111 & 3f & 77 \\
+\end{tabular}
+
+\section{2i.2}
+Kig i bilaget Opgave2i16.fsx
+
+\end{document}

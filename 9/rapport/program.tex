@@ -1,0 +1,62 @@
+Man kan eksekvere programmet ved at kører den default make case i makefilen,
+som automatisk bliver kørt hvis man kører make uden nogle argumenter.
+\begin{lstlisting}
+    make
+\end{lstlisting}
+Man vil dog ikke få noget output,
+som beskrevet i opgaven fordi jeg synes at dé ting man bliver bedt om at skrive ud i konsollen,
+hænger bedre sammen med unit tests, så dem har jeg prøvet at lave lidt flere af istedet.
+Man kører tests ved at kører make med tests som argument.
+\begin{lstlisting}
+    make tests
+\end{lstlisting}
+
+\section{Programmet}
+Hele programmet befinder sig i filen Car.fsx, der har fire member attributter
+som vi kan se i figur~\ref{fig:MemberAttributesInCar}.
+\begin{figure}[!htb]
+  \lstset{language=FSharp}
+  \text{
+    \lstinputlisting[firstline=17,lastline=36]{../Car.fsx}
+  }
+  \caption{Members/Attributter i Car}
+\label{fig:MemberAttributesInCar}
+\end{figure}
+
+Members i FSharp har public accessibility per default, så dét er den accessibility dé har
+fået og det giver god mening i forhold til min testing lige nu,
+sådan at jeg ikke skal bruge reflection til at ændre accessibility.
+Dog hvis man legede at dét var en rigtig car klasse,
+burde man selvfølgelig lave sådan noget, som benzin,
+fart og yearOfModel private, og hvor de kun kan ændres igennem et meget specifikt API.
+
+Opgaven nævner også 
+
+\begin{lstlisting}
+    gasLeft
+\end{lstlisting}
+
+ og 
+
+\begin{lstlisting}
+    addGas
+\end{lstlisting}
+
+hvor jeg har taget et design valg
+og bare lavet dét til standard getters og setters på benzin attributten,
+fordi de udfylder præcis den samme funktionalitet.
+
+Så har jeg de to metoder i klassen, som man kan se på figur~\ref{fig:MethodsInCar}
+\begin{figure}[!htb]
+  \lstset{language=FSharp}
+  \text{
+    \lstinputlisting[firstline=43,lastline=60]{../Car.fsx}
+  }
+  \caption{Funktionerne i Car}
+\label{fig:MethodsInCar}
+\end{figure}
+
+Funktionaliteten i Accelerate sætter farten op på bilen og reducere vores benzin,
+dette er muligt
+indtil benzinen er ved at ramme 0, hvorefter vi simulere en reducering af resten
+af benzinen og farten der begge falder til 0, hvorefter vi smider en exception.
